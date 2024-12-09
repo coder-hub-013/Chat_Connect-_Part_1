@@ -75,7 +75,7 @@ async function main() {
 //routes
 
 app.get('/',(req,res) => {
-    res.send("hello i am root")
+    res.send("hello i am root let url https:chat-connect-part-1.onrender.com");
 });
 
 //signup
