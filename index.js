@@ -104,7 +104,8 @@ app.post('/router/signup',async (req,res) => {
                     httpOnly : true, 
                     // sameSite: 'none',
                     sameSite:'strict',
-                    expires : new Date(Date.now() + 3600000)
+                    // expires : new Date(Date.now() + 3600000)
+                    expires : 3600000
                 });
                 console.log(newUser);  
                 res.status(200).json({message:"Sign up successfullly", token, user: {id:savedUser._id, email:savedUser.email,username:savedUser.username}});
@@ -137,10 +138,8 @@ app.post('/router/login',async (req,res) => {
                 res.cookie('jwt', token, { 
                     secure: true, 
                     httpOnly : true, 
-                    // sameSite: 'lax',
                     sameSite:'strict',
-                    expires : new Date(Date.now() + 3600000)
-                    // expires : 24 * 60 * 60 * 1000,
+                    expires : 3600000
                 });  
                 res.status(200).json({message:"Login Successfully", token, user: {id:userExist._id, email:userExist.email,username:userExist.username}});
     
