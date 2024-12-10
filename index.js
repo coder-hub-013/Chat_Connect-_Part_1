@@ -21,32 +21,32 @@ const { Server } = require('socket.io');
 const app = express();
 const server = http.createServer(app);
 // https://chat-connect-part-1.onrender.com
-const io = new Server(server,{
-    cors: {
-        origin : "http://localhost:5173",
-        credentials : true,
-        methods : ["POST","GET"]
-    }
-});
-
 // const io = new Server(server,{
 //     cors: {
-//         origin : "https://chat-connect-part-1.onrender.com",
+//         origin : "http://localhost:5173",
 //         credentials : true,
 //         methods : ["POST","GET"]
 //     }
 // });
 
-//cors
-const corsOptions = {
-    origin : "http://localhost:5173",
-    credentials : true,
-}
+const io = new Server(server,{
+    cors: {
+        origin : "https://chat-connect-part-1.onrender.com",
+        credentials : true,
+        methods : ["POST","GET"]
+    }
+});
 
+//cors
 // const corsOptions = {
-//     origin : "https://chat-connect-part-1.onrender.com",
+//     origin : "http://localhost:5173",
 //     credentials : true,
 // }
+
+const corsOptions = {
+    origin : "https://chat-connect-part-1.onrender.com",
+    credentials : true,
+}
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
@@ -70,7 +70,7 @@ main()
     })
 
 async function main() {
-    await mongoose.connect(dbUrl);
+    await mongoose.connect(Mongo_URL);
 }
 //routes
 
@@ -103,7 +103,8 @@ app.post('/router/signup',async (req,res) => {
                     secure: true, 
                     httpOnly : true, 
                     // sameSite: 'none',
-                    // expires : new Date(Date.now() + 3600000)
+                    sameSite:'strict',
+                    expires : 24 * 60 * 60 * 1000,
                 });
                 console.log(newUser);  
                 res.status(200).json({message:"Sign up successfullly", token, user: {id:savedUser._id, email:savedUser.email,username:savedUser.username}});
@@ -139,6 +140,7 @@ app.post('/router/login',async (req,res) => {
                     // sameSite: 'lax',
                     sameSite:'strict',
                     // expires : new Date(Date.now() + 3600000)
+                    expires : 24 * 60 * 60 * 1000,
                 });  
                 res.status(200).json({message:"Login Successfully", token, user: {id:userExist._id, email:userExist.email,username:userExist.username}});
     
