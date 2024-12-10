@@ -102,8 +102,8 @@ app.post('/router/signup',async (req,res) => {
                 res.cookie('jwt', token, { 
                     secure: true, 
                     httpOnly : true, 
-                    // sameSite: 'none',
-                    sameSite:'strict',
+                    sameSite: 'none',
+                    // sameSite:'strict',
                     // expires : new Date(Date.now() + 3600000)
                     // expires : 3600000
                     maxAge:3600000
@@ -139,7 +139,8 @@ app.post('/router/login',async (req,res) => {
                 res.cookie('jwt', token, { 
                     secure: true, 
                     httpOnly : true, 
-                    sameSite:'strict',
+                    sameSite:'none',
+                    // sameSite:'strict',
                     // expires : 3600000
                     maxAge:3600000
                 });  
