@@ -165,7 +165,7 @@ app.post("/router/logout",(req,res) => {
     console.log("/router/logout" ,"I am triggered");
     const cook = req.cookies;
     console.log("cook---------------------------",cook);
-    const removedCookie = res.clearCookie('jwt');
+    // const removedCookie = res.clearCookie('jwt');
     console.log("/router/logout",removedCookie);
     if(removedCookie) {
         res.status(200).json({message:"You are logout"})
