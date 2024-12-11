@@ -124,7 +124,9 @@ app.post('/router/signup',async (req,res) => {
 app.post('/router/login',async (req,res) => {
     try {
         if(req.body.data.email && req.body.data.password) {
+            console.log(req.body.data.email," + ", req.body.data.password);
             const userExist = await User.findOne({email:req.body.data.email});
+            console.log(userExist);
             if(!userExist) {
                 return res.status(500).json({message:"Email not found"})
             }
