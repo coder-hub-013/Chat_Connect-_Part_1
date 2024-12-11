@@ -100,7 +100,7 @@ app.post('/router/signup',async (req,res) => {
     
                 //cookies
                 res.cookie('jwt', token, { 
-                    // secure: true, 
+                    secure: true, 
                     httpOnly : true, 
                     sameSite: 'none',
                     // sameSite:'strict',
@@ -139,7 +139,7 @@ app.post('/router/login',async (req,res) => {
     
                 //cookies
                 res.cookie('jwt', token, { 
-                    // secure: true, 
+                    secure: true, 
                     httpOnly : true, 
                     sameSite:'none',
                     // sameSite:'strict',
