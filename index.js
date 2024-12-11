@@ -166,12 +166,12 @@ app.post("/router/logout",(req,res) => {
     const cook = req.cookies;
     console.log("cook---------------------------",cook);
     // const removedCookie = res.clearCookie('jwt');
-    console.log("/router/logout",removedCookie);
-    if(removedCookie) {
+    // console.log("/router/logout",removedCookie);
+    // if(removedCookie) {
         res.status(200).json({message:"You are logout"})
-    } else {
-        res.status(400).json({message:"Something went wrong"})
-    }
+    // } else {
+    //     res.status(400).json({message:"Something went wrong"})
+    // }
 });
 
 /*
