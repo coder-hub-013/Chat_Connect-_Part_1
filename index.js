@@ -100,7 +100,7 @@ app.post('/router/signup',async (req,res) => {
     
                 //cookies
                 res.cookie('jwt', token, { 
-                    secure: true, 
+                    // secure: true, 
                     httpOnly : true, 
                     sameSite: 'none',
                     // sameSite:'strict',
@@ -133,13 +133,13 @@ app.post('/router/login',async (req,res) => {
     
             const comparedPassword = await bcrypt.compare(req.body.data.password,userExist.password); 
             if(comparedPassword) {
-                const token = await jwt.sign({username:userExist._id},"helloiamnewincoding");
+                const token = await jwt.sign({username:userExist._id},"helloiamnewincoding",{ expiresIn: '1h' } );
                 userExist.token = token;
                 await userExist.save();
     
                 //cookies
                 res.cookie('jwt', token, { 
-                    secure: true, 
+                    // secure: true, 
                     httpOnly : true, 
                     sameSite:'none',
                     // sameSite:'strict',
