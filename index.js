@@ -510,17 +510,17 @@ io.on('connection',(socket) => {
             }
             const messageData = new Message({chat:chatId,content,sender:senderId});
             await messageData.save();
-
             const chat = await Chat.findByIdAndUpdate(chatId,{$push:{messages:messageData._id},lastMessage:messageData._id},
                                                        {new:true}
             ).populate('createdBy','username')
             .populate({path:'participants.user',select:'username'})
-            // .populate('participants','username')
             .populate({
                 path:'messages',
                 populate:{path:'sender',select:'username email'}
-            }).exec();
+            })
+            .exec();
 
+            // console.log(chat,"253-------")
         let chats2 = [];
 
         let abc = await Chat.findById(chatId)
@@ -536,9 +536,9 @@ io.on('connection',(socket) => {
                     if(onlineUser) {
                         io.to(onlineUser.socketId).emit('newMessage',chat);
                         //chatList
-                        if(chat.messages.length === 1) {
-                            io.to(onlineUser.socketId).emit('updateChatList',chats2);
-                        }
+                        // if(chat.messages.length === 1) {
+                            io.to(onlineUser.socketId).emit('updateChatList',abc);
+                        // }
                     }
                 })
             // }
